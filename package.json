@@ -2,11 +2,11 @@
   "name": "clear_scrapper",
   "version": "1.0.0",
   "description": "a scrapper of clear webapp",
-  "main": "index.js",
+  "main": "dist/app.js",
   "author": "igor rebeche rosa",
   "license": "MIT",
   "scripts": {
-    "start": "node index.js"
+    "start": "tsc && node dist/example.js"
   },
   "dependencies": {
     "@types/puppeteer": "^2.0.1",
