@@ -1,6 +1,6 @@
-import fs from "fs";
+import fs from 'fs'
 
-export const snooze = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+export const snooze = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
 
 export const saveToJson = (
   path: String,
@@ -8,11 +8,11 @@ export const saveToJson = (
   jsonData,
   outputMessage: String
 ) => {
-  const payload = JSON.stringify(jsonData, null, 4);
+  const payload = JSON.stringify(jsonData, null, 4)
   fs.writeFile(`${path}/${filename}.json`, payload, function (err) {
     if (err) {
-      console.log(err);
+      console.log(err)
     }
-  });
-  if (outputMessage) console.log(outputMessage);
-};
+  })
+  if (outputMessage) console.log(outputMessage)
+}

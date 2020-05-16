@@ -18,5 +18,8 @@
     "puppeteer-extra-plugin-stealth": "^2.4.9",
     "tslint": "5.12.1",
     "typescript": "^3.8.3"
+  },
+  "devDependencies": {
+    "prettier": "2.0.5"
   }
 }
