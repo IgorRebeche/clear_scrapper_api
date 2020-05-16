@@ -11,6 +11,9 @@ puppeteer.use(StealthPlugin());
 const loginIn = async (page: Page) => {
   await page.goto("https://www.clear.com.br/pit/");
   await page.focus("input[name=identificationNumber]");
+
+  console.log("Login at clear dashboard...");
+
   await page.keyboard.type(process.env.CNPJ);
 
   await page.focus("input[name=password]");
@@ -31,6 +34,8 @@ const loginIn = async (page: Page) => {
 };
 
 const getAssets = async (page: Page) => {
+  console.log("Scrapping Data...");
+
   // Get Iframe Handle
   const elementHandle = await page.$(".ifm");
   const frame = await elementHandle.contentFrame();
@@ -75,12 +80,13 @@ const getAssets = async (page: Page) => {
 
   const generalInformation = await Promise.all([AssetTotalAmount, Cash]);
 
+  console.log("Data Scrapped!");
+
   return { assets, generalInformation };
 };
 
 async function run() {
   const browser = await puppeteer.launch({
-    headless: false,
     defaultViewport: {
       height: 800,
       width: 1080,
@@ -96,9 +102,13 @@ async function run() {
   const response = await getAssets(page);
 
   saveToJson(
-    "../src/data",
-    `clear_report_${format(new Date(), "DD_MM_YYYY")}`,
-    response
+    "./src/data",
+    `clear_report_${format(new Date(), "dd_MM_yyyy")}`,
+    response,
+    "Saved Json output in src/data"
   );
+
+  console.log("Finished");
+  await page.close();
 }
 run();
