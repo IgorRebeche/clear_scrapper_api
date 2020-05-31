@@ -39,6 +39,11 @@ class ClearScrapperApp {
   async run(stepFunction: stepFunction) {
     return await stepFunction(this.page)
   }
+
+  async terminate() {
+    await this.browser.close()
+    console.log('Closing scrapper')
+  }
 }
 
 export default ClearScrapperApp
