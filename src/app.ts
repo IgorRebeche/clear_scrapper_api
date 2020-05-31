@@ -3,9 +3,10 @@ import ClearScrapperApp from './ClearScrapperApp'
 import { format } from 'date-fns'
 
 import loginIn from './steps/loginStep'
-import AssetDataStep from './steps/dashboard/AssetDataStep'
+import AssetDataStepV2 from './steps/dashboard/AssetDataStepV2'
 
 import { snooze, saveToJson } from './helper/general'
+import { __Response } from './entities/Response'
 
 async function main() {
   console.log('Starting Clear Scrapper')
@@ -14,7 +15,7 @@ async function main() {
 
   await scrapper.run(loginIn)
   await snooze(5000)
-  const response = await scrapper.run(AssetDataStep)
+  const response = await scrapper.run(AssetDataStepV2)
 
   const dataPath = './src/data'
   const filename = `clear_report_${format(new Date(), 'dd_MM_yyyy')}`
@@ -22,8 +23,14 @@ async function main() {
   saveToJson(dataPath, filename, response, outputMessage)
 }
 main()
-
-// const test = () => {
-//   saveToJson('./src/data', 'teste2', { teste: 1 }, '')
+// async function main2() {
+//   const assets = { teste: 1, teste2: 2 }
+//   const a = new __Response(assets, null)
+//   console.log(a.getResponse())
 // }
-// test()
+// main2()
+
+// // const test = () => {
+// //   saveToJson('./src/data', 'teste2', { teste: 1 }, '')
+// // }
+// // test()
